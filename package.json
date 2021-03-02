@@ -1,0 +1,11 @@
+{
+  "name": "yarn-patch-issue",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "main": "node main.js",
+  "scripts": {
+    "start": "node main.js"
+  }
+}

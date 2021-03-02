@@ -1,0 +1,31 @@
+diff --git a/dist/config/supportedRuntimes.js b/dist/config/supportedRuntimes.js
+index 933c3ef3f8e6c5444336287ccc83dabffc9e0769..89f4df8fb13ea4ad62d4e2e04728aff0e4b11ae0 100644
+--- a/dist/config/supportedRuntimes.js
++++ b/dist/config/supportedRuntimes.js
+@@ -23,7 +23,7 @@ const supportedJava = new Set(['java8', 'java11']); // NODE.JS
+ exports.supportedJava = supportedJava;
+ const supportedNodejs = new Set([// deprecated, but still working
+ 'nodejs4.3', 'nodejs6.10', 'nodejs8.10', // supported
+-'nodejs10.x', 'nodejs12.x']); // PROVIDED
++'nodejs10.x', 'nodejs12.x', 'nodejs14.x']); // PROVIDED
+ 
+ exports.supportedNodejs = supportedNodejs;
+ const supportedProvided = new Set(['provided']); // PYTHON
+diff --git a/dist/events/websocket/WebSocketClients.js b/dist/events/websocket/WebSocketClients.js
+index cb1e7920ade6375fa8f7a3f03259c6daf303a27c..bfc70166d9cd51ad2e309c2b6463672f68cd1806 100644
+--- a/dist/events/websocket/WebSocketClients.js
++++ b/dist/events/websocket/WebSocketClients.js
+@@ -157,8 +157,11 @@ class WebSocketClients {
+     lambdaFunction.setEvent(event); // let result
+ 
+     try {
+-      /* result = */
+-      await lambdaFunction.runHandler(); // TODO what to do with "result"?
++      result = await lambdaFunction.runHandler();
++
++      if(result && route !== '$connect' && route !== '$disconnect') {
++        return result;
++      }
+     } catch (err) {
+       console.log(err);
+       sendError(err);

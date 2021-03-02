@@ -1,0 +1,6 @@
+{
+  "name": "b",
+  "dependencies": {
+    "serverless-offline": "patch:serverless-offline@^6.8.0#../../serverless-offline-wsl.patch"
+  }
+}
